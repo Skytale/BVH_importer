@@ -288,7 +288,6 @@ class BVHImporterDialog(object):
 								mc.setKeyframe(self._channels[x], time=frame, value=float(data[x]))
 							except:
 								print "Error reading keyframe."
-								mc.setKeyframe(self._channels[x], time=frame, value=0)
 						frame = frame + 1
 	
 	def _clear_animation(self):
