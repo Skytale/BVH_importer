@@ -1,7 +1,8 @@
 # http://eat3d.com/free/maya_python
 
-from xml.dom.minidom import *
-from maya.cmds import *
+#from pymel.core import *
+#from xml.dom.minidom import *
+
 
 startTime = int(playbackOptions(query=True, minTime=True))
 stopTime = int(playbackOptions(query=True, maxTime=True))
