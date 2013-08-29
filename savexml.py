@@ -40,32 +40,24 @@ for i in range(startTime, stopTime+1):
 	joint_node = doc.createElement("Joints")
 	skel_node.appendChild(joint_node)
 
-	selection = ls(sl = True)
-	print selection
+	target = selected()
+	print target
 
-	for object in selection:
+	joints = listRelatives(target[0], ad=True)
+	joints.append(target[0])
+	print "~~~~~     " + str(joints) + "     ~~~~~"
+
+	for j in range(0,len(joints)):
 		try:
-			kids = listRelatives(ls(selection=True), children=True, type="joint", allDescendents=True)
-			for k in kids:
-				print k
-				k_node = doc.createElement(str(k))
-				joint_node.appendChild(k_node)
+			k_node = doc.createElement(str(joints[j]))
+			joint_node.appendChild(k_node)
 
-				p = xform(k, q=True, t=True, ws=True)
-				k_node.setAttribute("x", str(-1 * p[0]))
-				k_node.setAttribute("y", str(-1 * p[1]))
-				k_node.setAttribute("z", str(p[2]))
+			p = xform(joints[j], q=True, t=True, ws=True)
+			k_node.setAttribute("x", str(-1 * p[0]))
+			k_node.setAttribute("y", str(-1 * p[1]))
+			k_node.setAttribute("z", str(p[2]))
 		except:
-			print "No child joints."
-		print object
-		
-		object_node = doc.createElement(str(object))
-		joint_node.appendChild(object_node)
-
-		p = xform(k, q=True, t=True, ws=True)
-		object_node.setAttribute("x", str(-1 * p[0]))
-		object_node.setAttribute("y", str(-1 * p[1]))
-		object_node.setAttribute("z", str(p[2]))
+			print "Couldn't get joint position."
 
 xml_file = open(filePath + fileName, "w")
 xml_file.write(doc.toprettyxml())
