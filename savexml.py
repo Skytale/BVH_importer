@@ -1,7 +1,7 @@
 # http://eat3d.com/free/maya_python
 
-#from pymel.core import *
-#from xml.dom.minidom import *
+from pymel.core import *
+from xml.dom.minidom import *
 
 
 startTime = int(playbackOptions(query=True, minTime=True))
